@@ -10,6 +10,7 @@ import Heading from './shared/Heading';
 import Register from './register/Register';
 import Consultation from './consultation/Consultation';
 import Prediction from './prediction/Prediction';
+import Administrator from './administrator/Administrator';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/register' element={<Register />} exact />
           <Route path='/consultation' element={<Consultation />} exact />
           <Route path='/prediction' element={<Prediction />} exact />
+          <Route path='/admin'element={<Administrator />} exact/>
         </Routes>
       </ContextProvider>
     </Fragment>
