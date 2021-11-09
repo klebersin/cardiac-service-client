@@ -16,40 +16,42 @@ const style = {
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
-    { field: 'nombres', headerName: 'nombres', width: 150 },
-    { field: 'apellidos', headerName: 'apellidos', width: 150 },
-    { field: 'especialidad', headerName: 'especialidad', type: 'number', width: 150 },
-    { field: 'correo', headerName: 'correo', type: 'number', width: 150 },
-    { field: 'telefono', headerName: 'telefono', type: 'number', width: 90 },
-    { field: 'pais', headerName: 'pais', type: 'number', width: 90 },
-    { field: 'provincia', headerName: 'provincia', type: 'number', width: 90 },
-];
-
-var rows = [
-    {
-        id: 1,
-        nombres: 'alexis',
-        apellidos: 'huayna ',
-        especialidad: 'Psicologia',
-        correo: 'ahuayna@unsa.edu.pe',
-        telefono: '958478123',
-        pais: 'Peru',
-        provincia: 'Arequipa'
-    },
-    {
-        id: 2,
-        nombres: 'richi',
-        apellidos: 'smith',
-        especialidad: 'matematica',
-        correo: 'rsmith@unsa.edu.pe',
-        telefono: '598123684',
-        pais: 'Peru',
-        provincia: 'Puno'
-    }
+    { field: 'nombres', headerName: 'Nombres', width: 180 },
+    { field: 'apellidos', headerName: 'Apellidos', width: 180 },
+    { field: 'especialidad', headerName: 'Especialidad', width: 180 },
+    { field: 'correo', headerName: 'Correo', width: 180 },
+    { field: 'telefono', headerName: 'Telefono', type: 'number', width: 180 },
+    { field: 'pais', headerName: 'Pais', width: 180 },
+    { field: 'provincia', headerName: 'Provincia', width: 180 }
 ];
 
 const Administrator = ({props}) => {
     const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const [medicos, setMedicos] = useState([
+        {
+            id: 1,
+            nombres: 'alexis',
+            apellidos: 'huayna ',
+            especialidad: 'Psicologia',
+            correo: 'ahuayna@unsa.edu.pe',
+            telefono: '958478123',
+            pais: 'Peru',
+            provincia: 'Arequipa'
+        },
+        {
+            id: 2,
+            nombres: 'richi',
+            apellidos: 'smith',
+            especialidad: 'matematica',
+            correo: 'rsmith@unsa.edu.pe',
+            telefono: '598123684',
+            pais: 'Peru',
+            provincia: 'Puno'
+        }
+    ]);
     const [medico, setMedico] = useState({
         nombres: '',
         apellidos: '',
@@ -59,13 +61,22 @@ const Administrator = ({props}) => {
         pais: '',
         provincia: ''
     });
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+
+    const limpiarFormulario = () => {
+        setMedico({
+            nombres: '',
+            apellidos: '',
+            especialidad: '',
+            correo: '',
+            telefono: '',
+            pais: '',
+            provincia: ''
+        });
+    }
 
     const addMedico = () => {
-        console.log("Axios Process");
-        var nuevo_medico = {
-            id: rows.length + 1,
+        const nuevo_medico = {
+            id: medicos.length + 1,
             nombres: medico.nombres,
             apellidos: medico.apellidos,
             especialidad: medico.especialidad,
@@ -73,8 +84,13 @@ const Administrator = ({props}) => {
             telefono: medico.telefono,
             pais: medico.pais,
             provincia: medico.provincia
-        }
-        rows.push(nuevo_medico);
+        };
+        
+        var aux_medicos = medicos.slice();
+        aux_medicos.push(nuevo_medico);
+        
+        limpiarFormulario();
+        setMedicos(aux_medicos);
         setOpen(false);
     };
 
@@ -155,7 +171,7 @@ const Administrator = ({props}) => {
                 </Box>
             </Modal>
             <DataGrid
-                rows={rows}
+                rows={medicos}
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
