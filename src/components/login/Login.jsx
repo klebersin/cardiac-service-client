@@ -1,5 +1,6 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -21,7 +22,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Cardiac service
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -32,6 +33,10 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInSide() {
+  const navigate = useNavigate();
+  function handleClick() {
+    navigate("/register");
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -52,7 +57,8 @@ export default function SignInSide() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundImage:
+              "url(https://yt3.ggpht.com/ytc/AKedOLTQyMzrXlYp6nSYNkwWhnsTFdszNDBCImollAK_NQ=s900-c-k-c0x00ffffff-no-rj)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -73,7 +79,7 @@ export default function SignInSide() {
             }}
           >
             <Typography component="h1" variant="h5">
-              Sign in
+              Iniciar sesión
             </Typography>
             <Box
               component="form"
@@ -86,7 +92,7 @@ export default function SignInSide() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Usuario"
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -96,14 +102,14 @@ export default function SignInSide() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Contraseña"
                 type="password"
                 id="password"
                 autoComplete="current-password"
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+                label="Recordarme"
               />
               <Button
                 type="submit"
@@ -111,17 +117,17 @@ export default function SignInSide() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Iniciar sesión
               </Button>
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
-                    Forgot password?
+                    ¿Olvidaste tu contraseña?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <Link onClick={handleClick} variant="body2">
+                    {"¿No tienes una cuenta? Registrate"}
                   </Link>
                 </Grid>
               </Grid>
