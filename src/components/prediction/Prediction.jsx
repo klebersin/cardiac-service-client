@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Register() {
+function Prediction() {
     return (
         <div>
-            Register
+            Prediction
         </div>
     )
 }
 
-export default Register
+export default Prediction
